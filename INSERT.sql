@@ -26,7 +26,9 @@ VALUES	('Chromatica', 2020),
 		('Chronologic', 2019),
 		('High Dive', 2021),
 		('Die Die Lullaby', 2020),
-		('Unearthed', 2020);
+		('Unearthed', 2020),
+	    ('Requiem For Romance', 2016),
+	   	('Myself', 2023);
 	
 INSERT INTO tracks (name_track, duration_track, album_id)
 VALUES	('Replay', 187, 1),
@@ -47,7 +49,9 @@ VALUES	('Replay', 187, 1),
 		('Part Time Psycho', 185, 7),
 		('My Valentine', 192, 8),
 		('Ciwil War', 243, 8),
-		('Lil Gems', 188, 9);
+		('Pray', 194, 10),
+		('Lil Gems', 188, 9),
+		('Myself', 230, 11);
 	
 INSERT INTO collections (name_collection, date_of_release)
 VALUES	('Поп вечеринка', 2020),
@@ -81,7 +85,9 @@ VALUES	(1, 1),
 		(6, 6),
 		(7, 7),
 		(8, 8),
-		(9, 9);
+		(9, 9),
+		(8, 10),
+		(8, 11);
 	
 INSERT INTO tracks_collections (track_id, collection_id)
 VALUES	(1, 1),
@@ -104,17 +110,7 @@ VALUES	(1, 1),
 		(16, 2),
 		(17, 2), 
 		(18, 2),
-		(19, 3),
+		(20, 3),
 		(14, 3),
-		(15, 3);
-	
--- INSERT запросы для задания 4
-	
-INSERT INTO albums (name_album, date_of_release)
-VALUES('Requiem For Romance', 2016);
-
-INSERT INTO tracks (name_track, duration_track, album_id)
-VALUES ('Pray', 194, 10);
-
-INSERT INTO artist_albums (album_id, artist_id)
-VALUES (10, 8);
+		(15, 3),
+		(21, 1);

@@ -52,4 +52,4 @@ CREATE TABLE IF NOT EXISTS tracks_collections (
 	               REFERENCES tracks(track_id),
 	collection_id  INTEGER
                    REFERENCES collections(collection_id),
-                   CONSTRAINT t_c PRIMARY KEY (track_id, collection_id)
+                   CONSTRAINT t_c PRIMARY KEY (track_id, collection_id));

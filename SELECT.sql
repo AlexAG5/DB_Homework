@@ -23,8 +23,7 @@ WHERE NOT artist_name LIKE '% %';
 --Название треков, которые содержат слово «мой» или «my».
 
 SELECT name_track FROM tracks
-WHERE name_track LIKE '%мой%' OR name_track LIKE '%My%';
-
+WHERE string_to_array(lower(name_track), ' ') && ARRAY ['my', 'мой'];
 
 -- Задание 3.
 -- Количество исполнителей в каждом жанре.
@@ -33,15 +32,13 @@ SELECT name_genre, COUNT(artist_name) artists_quantity FROM genre g
 JOIN artist_genre ag ON g.genre_id = ag.genre_id
 JOIN artists a ON ag.artist_id = a.artist_id
 GROUP BY name_genre
-ORDER BY artists_quantity DESC; 
+ORDER BY artists_quantity DESC;
 
 -- Количество треков, вошедших в альбомы 2019–2020 годов.
 
-SELECT date_of_release, COUNT(name_track) tracks_quantity FROM albums a
-JOIN tracks t ON t.album_id = a.album_id
-WHERE date_of_release BETWEEN 2019 AND 2020
-GROUP BY date_of_release
-ORDER BY tracks_quantity;
+SELECT COUNT(name_track) FROM albums alb
+JOIN tracks t ON t.album_id = alb.album_id
+WHERE date_of_release BETWEEN 2019 and 2020;
 
 -- Средняя продолжительность треков по каждому альбому.
 
@@ -69,18 +66,16 @@ JOIN artists a ON a.artist_id = a_a.album_id
 WHERE artist_name LIKE '%Allie X%'
 ORDER BY name_collection;
 
-
 -- Задание 4.
 -- Названия альбомов, в которых присутствуют исполнители более чем одного жанра.
 
-SELECT name_album FROM albums a
-JOIN artist_albums a_a ON a.album_id = a_a.album_id 
-JOIN artists art ON art.artist_id = a_a.artist_id 
+SELECT DISTINCT name_album FROM albums alb
+JOIN artist_albums a_a ON alb.album_id = a_a.album_id 
+JOIN artists art ON a_a.artist_id = art.artist_id 
 JOIN artist_genre a_g ON art.artist_id = a_g.artist_id 
-JOIN genre g ON g.genre_id = a_g.genre_id 
-GROUP BY name_album
-HAVING COUNT(DISTINCT name_genre) > 1
-ORDER BY name_album;
+GROUP BY name_album, a_g.artist_id 
+HAVING COUNT(a_g.genre_id) > 1;
+
 
 -- Наименования треков, которые не входят в сборники.
 
